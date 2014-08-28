@@ -1,6 +1,7 @@
 require 'webrick'
 require_relative 'servlets/root'
 require_relative 'servlets/hello_world'
+require_relative 'servlets/posts_controller'
 
 class BasicMVCApp
 
@@ -11,8 +12,7 @@ class BasicMVCApp
 		config.update(:DocumentRoot => File.expand_path('../../public', __FILE__ ) )
 		server = HTTPServer.new(config)
 		yield server if block_given?
-		# server.mount('/hello_world', HelloWorld)
-		# server.mount('/hello_world', HTTPServlet::FileHandler)
+		server.mount('/posts', PostsController)
 		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
 		server.start
 	end

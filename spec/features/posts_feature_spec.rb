@@ -12,4 +12,4 @@ describe 'Posts:' do
 	end
 
 end
-puts File.expand_path('../public', __FILE__ )
+
