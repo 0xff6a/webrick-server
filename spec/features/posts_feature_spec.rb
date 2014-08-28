@@ -26,7 +26,7 @@ describe 'Posts:' do
 	end
 
 	def _new_post_form
-		
+		"	<form action='/posts/' method='post'>"
 	end
 
 end

@@ -11,8 +11,8 @@ class BasicMVCApp
 	def self.start_webrick(config = {})
 		config.update(:Port => 8000)
 		config.update(:DocumentRoot => File.expand_path('../../public', __FILE__ ) )
+		
 		server = HTTPServer.new(config)
-		# yield server if block_given?
 		server.mount('/posts', PostsController)
 		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
 		server.start
