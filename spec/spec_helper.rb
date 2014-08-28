@@ -19,7 +19,10 @@ require 'webrick'
 RSpec.configure do |config|
 
   config.before(:suite) do
-    @server_thread = Thread.new { BasicMVCApp.start_webrick }
+    @server_thread = Thread.new do 
+      BasicMVCApp.start_webrick({ :Logger => WEBrick::Log.new("/dev/null"),
+                                  :AccessLog => []})
+     end
   end
 
   config.after(:suite) do

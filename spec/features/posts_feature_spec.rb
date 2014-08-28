@@ -14,10 +14,19 @@ describe 'Posts:' do
 			expect(data).to include(_new_post_link)
 		end
 
+		it 'a user can access a form to add a new link' do
+			data = Net::HTTP.get URI.parse('http://localhost:8000/posts/new')
+			expect(data).to include(_new_post_form)
+		end
+
 	end
 
 	def _new_post_link
 		"<a href='/posts/new'>New Post</a>"
+	end
+
+	def _new_post_form
+		
 	end
 
 end
