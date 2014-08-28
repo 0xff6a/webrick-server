@@ -1,0 +1,1 @@
+Building a simple blogging engine with no gems!
