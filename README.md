@@ -27,4 +27,4 @@ Running the Application:
 Running the Test Suite:
 -----------------------
 
-$ rspec from root
+- $ rspec from root
