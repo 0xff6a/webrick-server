@@ -1,5 +1,6 @@
 require 'webrick'
-require_relative 'root'
+require_relative 'servlets/root'
+require_relative 'servlets/hello_world'
 
 class BasicMVCApp
 
@@ -7,10 +8,11 @@ class BasicMVCApp
 
 	def self.start_webrick(config = {})
 		config.update(:Port => 8000)
-		config.update(:DocumentRoot => File.expand_path('~/public/html') )
+		config.update(:DocumentRoot => File.expand_path('~/MakersAcademy/Webrick-Server/public') )
 		server = HTTPServer.new(config)
 		yield server if block_given?
-		server.mount('/', Root)
+		# server.mount('/hello_world', HelloWorld)
+		# server.mount('/hello_world', HTTPServlet::FileHandler)
 		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
 		server.start
 	end
