@@ -1,27 +1,21 @@
 require 'webrick'
+require_relative 'root'
 
 class BasicMVCApp
 
-	def self.run
-		root = File.expand_path '~/public/html'
-		server = WEBrick::HTTPServer.new :Port => 8000, :DocumentRoot => root
+	include WEBrick
 
-		trap 'INT' do
-			server.shutdown
-		end
-
-		server.mount_proc '/' do |request, response|
-			response.body = 'Hello World'
-		end
-
+	def self.start_webrick(config = {})
+		config.update(:Port => 8000)
+		config.update(:DocumentRoot => File.expand_path('~/public/html') )
+		server = HTTPServer.new(config)
+		yield server if block_given?
+		server.mount('/', Root)
+		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
 		server.start
-	end
-
-	def self.call(environment = {})
-		[ '200', {"Content-Type" => "text/plain"}, "Hello world"]
 	end
 
 end
 
 # start the server if ruby file executed directly
-BasicMVCApp.run if 'lib/server.rb' == $0
+BasicMVCApp.start_webrick if __FILE__ == $0
