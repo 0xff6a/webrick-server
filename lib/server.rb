@@ -17,6 +17,10 @@ class BasicMVCApp
 		server.start
 	end
 
+	def self.call(environment = {})
+		[ '200', {"Content-Type" => "text/plain"}, "Hello world"]
+	end
+
 end
 
 # start the server if ruby file executed directly
