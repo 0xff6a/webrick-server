@@ -9,11 +9,11 @@
 	<% if posts.any? %>
 		<% posts.each do |post| %>
 			<article>
-				<h3><%= post.title %></h3>
+				<h3><%= post.id %>. <%= post.title %></h3>
 				<p><%= post.content %></p>
 				<em>created at <%= post.created_at %></em>
 				<nav>
-					<a href='/posts/delete'>Delete Post</a>
+					<a href='/posts/delete/<%= post.id %>'>Delete Post</a>
 				</nav>
 			</article>
 		<% end %>

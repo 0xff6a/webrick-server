@@ -35,7 +35,7 @@ describe 'Posts:' do
 			expect(data).to include(_delete_post_link)
 		end
 
-		xit 'a user should be able to edit a post' do
+		it 'a user should be able to edit a post' do
 
 		end
 
@@ -63,7 +63,7 @@ describe 'Posts:' do
 	end
 
 	def _delete_post_link
-		"<a href='/posts/delete'>Delete Post</a>"
+		"<a href='/posts/delete/1'>Delete Post</a>"
 	end
 
 	def _new_post_form
