@@ -2,8 +2,9 @@ require 'database'
 
 describe Database do
 	
-	let(:db) 		{ Database.new('data.csv') 	}
-	let(:post) 	{ double Post 							}
+	let(:db) 		{ Database.new('data.csv') 														}
+	let(:post) 	{ double Post, values: ['title', 'content']						}
+	let(:csv)		{ double CSV 																					}
 
 	context 'default settings' do
 
@@ -33,11 +34,18 @@ describe Database do
 	context 'file backup:' do
 
 		it 'should load data from the parent file' do
-
+			row = double :row
+			expect(CSV).to receive(:open).with(db.parent_file, 'r').and_yield(row)
+			expect(Post).to receive(:create_post)
+			expect(db).to receive(:insert_post)
+			db.load_data
 		end
 
 		it 'should save data to the parent file' do
-
+			db.insert_post(post)
+			expect(CSV).to receive(:open).with(db.parent_file, 'wb').and_yield(csv)
+			expect(csv).to receive(:<<).with(['title', 'content'])
+			db.backup_data
 		end
 
 	end

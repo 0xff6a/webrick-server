@@ -18,4 +18,9 @@ class Post
 		content
 	end
 
+	def self.create_post(data)
+		title, content = data
+		Post.new(title, content)
+	end
+
 end

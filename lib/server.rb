@@ -1,5 +1,9 @@
+#Libraries
 require 'webrick'
 require 'erb'
+#Database
+require_relative 'database'
+#Servlets
 require_relative 'servlets/root'
 require_relative 'servlets/hello_world'
 require_relative 'servlets/posts_controller'
