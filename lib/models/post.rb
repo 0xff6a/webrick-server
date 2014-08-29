@@ -21,7 +21,7 @@ class Post
 
 	def self.create_post(data)
 		title, content = data
-		Post.new(title, content)
+		post = Post.new(title, content)
 	end
 
 end

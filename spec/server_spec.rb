@@ -20,6 +20,11 @@ describe 'Simple server:' do
 			expect(data).to eq 'Not Hello World'
 		end	
 
+		it 'responds with a 404 error for undefined routes' do
+			data = Net::HTTP.get URI.parse('http://localhost:8000/posts/notavalidroute')
+			expect(data).to include('Something has gone wrong')
+		end
+
 	end
 
 end

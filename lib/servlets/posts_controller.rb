@@ -7,6 +7,8 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 				response_for_index(response)
 			when '/posts/new'
 				response_for_new(response)
+			else
+				response_for_error(response)
 		end
 
 	end
@@ -32,6 +34,12 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 		response.status = 200
 		response['Content-Type'] = 'text/html'
 		response.body = render_new
+	end
+
+	def response_for_error(response)
+		response.status = 404
+		response['Content-Type'] = 'text/html'
+		response.body = 'Something has gone wrong'
 	end
 
 	def render_index
