@@ -61,7 +61,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			key, value = pair.split('=')
 			parsed_data[key] = value
 		end
-		parsed_data.values
+		parsed_data.values.map{ |string| string.gsub('+', ' ')}
 	end
 
 end

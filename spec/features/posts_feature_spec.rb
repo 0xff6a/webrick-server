@@ -20,9 +20,9 @@ describe 'Posts:' do
 		end
 
 		it 'a user can create a post from the form' do
-			_post('/posts', { title: 'Test', content: '...blah...' } )
+			_post('/posts', { title: 'Test', content: 'blah blah' } )
 			data = _get('/posts')
-			expect(data).to include('Test') && include('...blah...')
+			expect(data).to include('Test') && include('blah blah')
 		end
 
 	end
