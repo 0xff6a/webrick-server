@@ -23,6 +23,13 @@ Functionality:
 - Users can delete posts
 - A list of posts is displayed on the homepage
 
+Notes:
+------
+- Server is built using WEBrick library
+- Testing framework generates HTTP requests to the server using the Net::HTTP library
+- Testing framework boots up server in test mode in a separate thread before the suite is started and terminates the thread once all tests have been run
+- DB is implemented using a combination of constants and csv files (to maintain data if server goes offline)
+
 Running the Application:
 -----------------------
 
