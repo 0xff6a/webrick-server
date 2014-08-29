@@ -15,8 +15,9 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 		
 		case request.path
 			when '/posts'
-				new_post_params =  _parse_form_data(request.body)
-				create_new_post(new_post_params)
+				params =  _parse_form_data(request.body)
+				new_post = Post.create_post(params)
+				DATABASE.insert_post(new_post)
 				response_for_index(response)
 		end
 
@@ -59,7 +60,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			key, value = pair.split('=')
 			parsed_data[key] = value
 		end
-		parsed_data
+		parsed_data.values
 	end
 
 end

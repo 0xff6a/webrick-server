@@ -23,7 +23,7 @@ class Database
 
 	def load_data
 		CSV.foreach(parent_file, "r") do |row|
-			insert_post(Post::create_post(row))
+			insert_post(Post.create_post(row))
 		end
 	end
 

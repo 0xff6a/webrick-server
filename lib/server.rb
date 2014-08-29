@@ -7,11 +7,13 @@ require_relative 'database'
 require_relative 'servlets/root'
 require_relative 'servlets/hello_world'
 require_relative 'servlets/posts_controller'
+#Models
+require_relative 'models/post'
+
+DATA_FILE = File.expand_path('../../data.csv', __FILE__ ) 
+DATABASE = Database.new(DATA_FILE)
 
 class BasicMVCApp
-
-	DATA_FILE = File.expand_path('../../data.csv', __FILE__ ) 
-	DATABASE = Database.new(DATA_FILE)
 
 	include WEBrick
 
@@ -25,7 +27,7 @@ class BasicMVCApp
 		config.update(:DocumentRoot => File.expand_path('../../public', __FILE__ ) )
 		
 		server = HTTPServer.new(config)
-		server.mount('/posts', PostsController)
+		server.mount('/posts/', PostsController)
 		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
 		server.start
 	end
