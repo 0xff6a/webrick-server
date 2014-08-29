@@ -35,8 +35,8 @@ describe Database do
 
 		it 'should load data from the parent file' do
 			row = double :row
-			expect(CSV).to receive(:open).with(db.parent_file, 'r').and_yield(row)
-			expect(Post).to receive(:create_post)
+			expect(CSV).to receive(:foreach).with(db.parent_file, 'r').and_yield(row)
+			expect(Post).to receive(:create_post).with(row)
 			expect(db).to receive(:insert_post)
 			db.load_data
 		end

@@ -10,9 +10,17 @@ require_relative 'servlets/posts_controller'
 
 class BasicMVCApp
 
+	DATA_FILE = File.expand_path('../../data.csv', __FILE__ ) 
+	DATABASE = Database.new(DATA_FILE)
+
 	include WEBrick
 
-	def self.start_webrick(config = {})
+	def self.run(config = {})
+		DATABASE.load_data
+		BasicMVCApp.start_webrick(config)
+	end
+
+	def self.start_webrick(config)
 		config.update(:Port => 8000)
 		config.update(:DocumentRoot => File.expand_path('../../public', __FILE__ ) )
 		
@@ -25,4 +33,4 @@ class BasicMVCApp
 end
 
 # start the server if ruby file executed directly
-BasicMVCApp.start_webrick if __FILE__ == $0
+BasicMVCApp.run if __FILE__ == $0

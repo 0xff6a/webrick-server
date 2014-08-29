@@ -1,4 +1,5 @@
 require 'CSV'
+require_relative 'models/post'
 
 class Database
 
@@ -21,7 +22,7 @@ class Database
 	end
 
 	def load_data
-		CSV.open(parent_file, "r") do |row|
+		CSV.foreach(parent_file, "r") do |row|
 			insert_post(Post::create_post(row))
 		end
 	end
