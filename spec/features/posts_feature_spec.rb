@@ -19,6 +19,13 @@ describe 'Posts:' do
 			expect(data).to include(_new_post_form)
 		end
 
+		it 'a user can create a post from the form' do
+			params = { title: 'Test', content: '...blah...' }
+			uri = URI.parse('http://localhost:8000/posts')
+			data = Net::HTTP.post_form(uri, params)
+			expect(data).to include('Test') && include('...blah...')
+		end
+
 	end
 
 	def _new_post_link
