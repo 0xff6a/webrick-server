@@ -16,8 +16,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 		case request.path
 			when '/posts'
 				params =  _parse_form_data(request.body)
-				new_post = Post.create_post(params)
-				DATABASE.insert_post(new_post)
+				DATABASE.insert_post(Post.create_post(params))
 				response_for_index(response)
 		end
 

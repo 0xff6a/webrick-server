@@ -11,6 +11,7 @@ class Database
 	end
 
 	def insert_post(post)
+		post.id = posts.length
 		posts << post
 	end
 

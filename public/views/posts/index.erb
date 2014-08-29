@@ -3,17 +3,22 @@
 	<title>MVC</title>
 </head>
 <body>
+	<nav>
+		<a href='/posts/new'><%= erb_link %></a>
+	</nav>
 	<% if posts.any? %>
 		<% posts.each do |post| %>
 			<article>
 				<h3><%= post.title %></h3>
 				<p><%= post.content %></p>
 				<em>created at <%= post.created_at %></em>
+				<nav>
+					<a href='/posts/delete'>Delete Post</a>
+				</nav>
 			</article>
 		<% end %>
 	<% else %>
 		<h1><%= erb_title %></h1>
-		<a href='/posts/new'><%= erb_link %></a>
 	<% end %>
 </body>
 </html>

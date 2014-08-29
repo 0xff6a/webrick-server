@@ -1,11 +1,12 @@
 class Post
 
-	attr_accessor :title, :content, :created_at
+	attr_accessor :title, :content, :created_at, :id
 
 	def initialize(title, content)
 		@title = ensure_valid_title(title)
 		@content = ensure_valid_content(content)
 		@created_at = Time.now
+		@id = nil
 	end
 
 	def ensure_valid_title(title)

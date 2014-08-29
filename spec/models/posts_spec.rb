@@ -26,4 +26,8 @@ describe Post do
 		expect(post.created_at).to be_within(1).of Time.now
 	end
 
+	it 'should have an id field that is nil by default' do
+		expect(post.id).to be nil
+	end
+
 end

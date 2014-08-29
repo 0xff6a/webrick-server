@@ -2,10 +2,10 @@ require 'database'
 
 describe Database do
 	
-	let(:db) 		{ Database.new('data_test.csv') 														}
-	let(:post) 	{ double Post, title: 'title', content: 'content'			}
-	let(:csv)		{ double CSV 																					}
-	let(:row)		{ double :row																					}
+	let(:db) 		{ Database.new('data_test.csv') 																			}
+	let(:post) 	{ double Post, :title => 'title', :content => 'content', :id= => 0		}
+	let(:csv)		{ double CSV 																													}
+	let(:row)		{ double :row																													}
 
 	context 'default settings' do
 
@@ -28,6 +28,11 @@ describe Database do
 		it 'posts can be added' do
 			db.insert_post(post)
 			expect(db.posts).to include(post)
+		end
+
+		it 'adds a unique id to a post when it is added' do
+			expect(post).to receive(:id=).with(0)
+			db.insert_post(post)
 		end
 
 	end

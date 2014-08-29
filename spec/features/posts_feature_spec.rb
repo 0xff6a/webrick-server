@@ -27,6 +27,28 @@ describe 'Posts:' do
 
 	end
 
+	context 'when there are posts' do
+
+		it 'a user should be able to see a link delete a post on the homepage' do
+			_post('/posts', { title: 'Test', content: 'blah blah' } )
+			data = _get('/posts')
+			expect(data).to include(_delete_post_link)
+		end
+
+		xit 'a user should be able to edit a post' do
+
+		end
+
+		xit 'a user should be able to see a link to edit a post on the homepage' do
+
+		end
+
+		xit 'a user should be able to delete a post' do
+
+		end
+
+	end
+
 	def _get(route)
 		Net::HTTP.get URI.parse('http://localhost:8000' + route)
 	end
@@ -38,6 +60,10 @@ describe 'Posts:' do
 
 	def _new_post_link
 		"<a href='/posts/new'>New Post</a>"
+	end
+
+	def _delete_post_link
+		"<a href='/posts/delete'>Delete Post</a>"
 	end
 
 	def _new_post_form
