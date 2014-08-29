@@ -1,14 +1,14 @@
 #Libraries
 require 'webrick'
 require 'erb'
-#Database
-require_relative 'database'
 #Servlets
 require_relative 'servlets/root'
 require_relative 'servlets/hello_world'
 require_relative 'servlets/posts_controller'
 #Models
 require_relative 'models/post'
+#Database
+require_relative 'database'
 
 DATA_FILE = File.expand_path("../../data.csv", __FILE__ ) 
 DATABASE = Database.new(DATA_FILE)

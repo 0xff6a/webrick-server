@@ -36,7 +36,7 @@ class Database
 	private
 
 	def _to_csv(post)
-		[post.title, post.content]
+		[post.id, post.title, post.content]
 	end
 
 end

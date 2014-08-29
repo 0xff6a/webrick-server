@@ -2,10 +2,10 @@ require 'database'
 
 describe Database do
 	
-	let(:db) 		{ Database.new('data_test.csv') 																			}
-	let(:post) 	{ double Post, :title => 'title', :content => 'content', :id= => 0		}
-	let(:csv)		{ double CSV 																													}
-	let(:row)		{ double :row																													}
+	let(:db) 		{ Database.new('data_test.csv') 																								}
+	let(:post) 	{ double Post, :title => 'title', :content => 'content', :id= => 0, :id => 0		}
+	let(:csv)		{ double CSV 																																		}
+	let(:row)		{ double :row																																		}
 
 	context 'default settings' do
 
@@ -49,7 +49,7 @@ describe Database do
 		it 'should save data to the parent file' do
 			db.insert_post(post)
 			expect(CSV).to receive(:open).with(db.parent_file, 'wb').and_yield(csv)
-			expect(csv).to receive(:<<).with(['title', 'content'])
+			expect(csv).to receive(:<<).with([0,'title', 'content'])
 			db.backup_data
 		end
 
