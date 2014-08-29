@@ -5,7 +5,7 @@ describe Database do
 	let(:db) 		{ Database.new('data_test.csv') 																								}
 	let(:post) 	{ double Post, :title => 'title', :content => 'content', :id= => 0, :id => 0		}
 	let(:csv)		{ double CSV 																																		}
-	let(:row)		{ double :row																																		}
+	let(:row)		{ double :row, :[] => nil																																		}
 
 	context 'default settings' do
 
@@ -41,7 +41,7 @@ describe Database do
 
 		it 'should load data from the parent file' do
 			expect(CSV).to receive(:foreach).with(db.parent_file, 'r').and_yield(row)
-			expect(Post).to receive(:create_post).with(row)
+			expect(Post).to receive(:create_post).with(row[1,2])
 			expect(db).to receive(:insert_post)
 			db.load_data
 		end
