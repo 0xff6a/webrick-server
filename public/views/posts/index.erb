@@ -4,7 +4,16 @@
 </head>
 <body>
 	<h1><%= erb_title %></h1>
-	<a href='/posts/new'><%= erb_link %></a>
+	<% if posts.any? %>
+		<% posts.each do |post| %>
+			<article>
+				<h2><%= post.title %></h2>
+				<p><%= post.content %></p>
+			</article>
+		<% end %>
+	<% else %>
+		<a href='/posts/new'><%= erb_link %></a>
+	<% end %>
 </body>
 </html>
 

@@ -38,6 +38,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 	def render_index
 		erb_title = 'There are no posts at present'
 		erb_link = 'New Post'
+		posts = DATABASE.posts
 		template = _template_for('posts/index.erb')
 		html_content = template.result(binding)
 	end

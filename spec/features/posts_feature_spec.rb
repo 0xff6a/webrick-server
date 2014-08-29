@@ -22,7 +22,8 @@ describe 'Posts:' do
 		it 'a user can create a post from the form' do
 			params = { title: 'Test', content: '...blah...' }
 			uri = URI.parse('http://localhost:8000/posts')
-			data = Net::HTTP.post_form(uri, params)
+			Net::HTTP.post_form(uri, params)
+			data = Net::HTTP.get URI.parse('http://localhost:8000/posts')
 			expect(data).to include('Test') && include('...blah...')
 		end
 
