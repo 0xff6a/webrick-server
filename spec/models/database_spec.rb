@@ -2,14 +2,15 @@ require 'database'
 
 describe Database do
 	
-	let(:db) 		{ Database.new('data.csv') 														}
-	let(:post) 	{ double Post, values: ['title', 'content']						}
+	let(:db) 		{ Database.new('data_test.csv') 														}
+	let(:post) 	{ double Post, title: 'title', content: 'content'			}
 	let(:csv)		{ double CSV 																					}
+	let(:row)		{ double :row																					}
 
 	context 'default settings' do
 
 		it 'should have a parent file' do
-			expect(db.parent_file).to eq 'data.csv'
+			expect(db.parent_file).to eq 'data_test.csv'
 		end
 
 	end
@@ -34,7 +35,6 @@ describe Database do
 	context 'file backup:' do
 
 		it 'should load data from the parent file' do
-			row = double :row
 			expect(CSV).to receive(:foreach).with(db.parent_file, 'r').and_yield(row)
 			expect(Post).to receive(:create_post).with(row)
 			expect(db).to receive(:insert_post)
@@ -46,6 +46,12 @@ describe Database do
 			expect(CSV).to receive(:open).with(db.parent_file, 'wb').and_yield(csv)
 			expect(csv).to receive(:<<).with(['title', 'content'])
 			db.backup_data
+		end
+
+		it 'can clear the backup' do
+			expect(CSV).to receive(:foreach).with(db.parent_file, 'r').and_yield(row)
+			expect(row).to receive(:clear)
+			db.clear_data
 		end
 
 	end

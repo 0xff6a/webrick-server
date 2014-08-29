@@ -10,7 +10,7 @@ require_relative 'servlets/posts_controller'
 #Models
 require_relative 'models/post'
 
-DATA_FILE = File.expand_path('../../data.csv', __FILE__ ) 
+DATA_FILE = File.expand_path("../../data.csv", __FILE__ ) 
 DATABASE = Database.new(DATA_FILE)
 
 class BasicMVCApp
@@ -25,11 +25,15 @@ class BasicMVCApp
 	def self.start_webrick(config)
 		config.update(:Port => 8000)
 		config.update(:DocumentRoot => File.expand_path('../../public', __FILE__ ) )
-		
 		server = HTTPServer.new(config)
 		server.mount('/posts/', PostsController)
-		['INT', 'TERM'].each { |signal| trap(signal) { server.shutdown } }
+		['INT', 'TERM'].each { |signal| trap(signal) { BasicMVCApp.shutdown(server) } }
 		server.start
+	end
+
+	def self.shutdown(server)
+		DATABASE.backup_data
+		server.shutdown 
 	end
 
 end

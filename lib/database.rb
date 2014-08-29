@@ -3,8 +3,7 @@ require_relative 'models/post'
 
 class Database
 
-	attr_reader 	:parent_file
-	attr_accessor :posts
+	attr_accessor :posts, :parent_file
 
 	def initialize(parent_file)
 		@parent_file = parent_file
@@ -27,10 +26,16 @@ class Database
 		end
 	end
 
+	def clear_data
+		CSV.foreach(parent_file, "r") do |row|
+			row.clear
+		end
+	end
+
 	private
 
-	def _to_csv(data)
-		data.values
+	def _to_csv(post)
+		[post.title, post.content]
 	end
 
 end

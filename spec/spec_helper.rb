@@ -19,7 +19,10 @@ require 'webrick'
 RSpec.configure do |config|
 
   config.before(:suite) do
-    @server_thread = Thread.new do 
+    @server_thread = Thread.new do
+      
+      DATABASE.parent_file = File.expand_path("../../data_test.csv", __FILE__ )
+      
       BasicMVCApp.run({ :Logger => WEBrick::Log.new("/dev/null"),
                                   :AccessLog => []})
      end
