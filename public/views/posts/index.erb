@@ -12,7 +12,8 @@
 				<h3><%= post.id %>. <%= post.title %></h3>
 				<p><%= post.content %></p>
 				<nav>
-					<a href='/posts/delete/<%= post.id %>'>Delete Post</a>
+					<a href='/posts/edit?id=<%= post.id %>'>Edit Post</a>
+					<a href='/posts/delete?id=<%= post.id %>'>Delete Post</a>
 				</nav>
 			</article>
 		<% end %>

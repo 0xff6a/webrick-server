@@ -16,6 +16,7 @@ class Database
 	end
 
 	def backup_data
+		clear_data
 		CSV.open(parent_file, "wb") do |csv|
 			posts.each { |post| csv << _to_csv(post) }
 		end

@@ -8,8 +8,10 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			when '/posts/new'
 				response_for_new(response)
 			when '/posts/delete'
-					puts request.query
-
+				DATABASE.posts.delete_at(request.query['id'].to_i)
+				response_for_index
+			when '/posts/edit'
+				response_for_edit(request.query['id'].to_i, response)
 			else
 				response_for_error(response)
 		end
@@ -22,7 +24,6 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			when '/posts'
 				params =  _parse_form_data(request.body)
 				DATABASE.insert_post(Post.create_post(params))
-				puts 'DONE'
 				response_for_index(response)
 		end
 
@@ -38,6 +39,12 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 		response.status = 200
 		response['Content-Type'] = 'text/html'
 		response.body = render_new
+	end
+
+	def response_for_edit(id, response)
+		response.status = 200
+		response['Content-Type'] = 'text/html'
+		response.body = render_edit(DATABASE.posts[id])
 	end
 
 	def response_for_error(response)
@@ -56,6 +63,13 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 
 	def render_new
 		erb_title = 'New Post'
+		template = _template_for('posts/new.erb')
+		html_content = template.result(binding)
+	end
+
+	def render_edit(post)
+		erb_title = 'Edit Post'
+		target_post = post
 		template = _template_for('posts/new.erb')
 		html_content = template.result(binding)
 	end

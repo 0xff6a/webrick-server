@@ -37,16 +37,21 @@ describe 'Posts:' do
 		end
 
 		it 'a user should be able to delete a post' do
-			_get('/posts/delete/1')
+			_get('/posts/delete?id=0')
 			data = _get('/posts')
 			expect(data).not_to include('Test') && include('blah blah')
 		end
 
-		xit 'a user should be able to see a link to edit a post on the homepage' do
+		it 'a user should be able to see a link to edit a post on the homepage' do
+			data = _get('/posts')
+			expect(data).to include(_edit_post_link)
+		end
+
+		it 'a user should be able to see a form to edit a post' do
 
 		end
 
-		xit 'a user should be able to edit a post' do
+		it 'a user should be able to edit a post' do
 
 		end
 
@@ -70,11 +75,19 @@ describe 'Posts:' do
 	end
 
 	def _delete_post_link
-		"<a href='/posts/delete/0'>Delete Post</a>"
+		"<a href='/posts/delete?id=0'>Delete Post</a>"
+	end
+
+	def _edit_post_link
+		"<a href='/posts/edit?id=0'>Edit Post</a>"
 	end
 
 	def _new_post_form
 		"	<form action='/posts' method='post'>"
+	end
+
+	def _edit_post_form
+		"	<form action='/posts/edit?=0' method='post'>"
 	end
 
 end

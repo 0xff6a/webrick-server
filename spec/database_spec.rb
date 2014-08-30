@@ -53,6 +53,7 @@ describe Database do
 
 		it 'should save data to the parent file' do
 			db.insert_post(post)
+			allow(db).to receive(:clear_data)
 			expect(CSV).to receive(:open).with(db.parent_file, 'wb').and_yield(csv)
 			expect(csv).to receive(:<<).with([0,'title', 'content'])
 			db.backup_data
