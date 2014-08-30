@@ -9,7 +9,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 				response_for_new(response)
 			when '/posts/delete'
 				DATABASE.posts.delete_at(request.query['id'].to_i)
-				response_for_index
+				response_for_index(response)
 			when '/posts/edit'
 				response_for_edit(request.query['id'].to_i, response)
 			else
@@ -28,8 +28,12 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			when '/posts/edit'
 				post = DATABASE.posts[request.query['id'].to_i]
 				post.title, post.content = _parse_form_data(request.body)
-				response_for_index
+				response_for_index(response)
 		end
+
+	end
+
+	def action_for_delete(request)
 
 	end
 

@@ -91,7 +91,7 @@ describe 'Posts:' do
 	end
 
 	def _edit_post_form
-		"<form action='/posts/edit?id=0' method='post'>"
+		"<form action='/posts/edit' method='post'>"
 	end
 
 end
