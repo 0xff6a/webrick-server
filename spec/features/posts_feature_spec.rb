@@ -48,11 +48,15 @@ describe 'Posts:' do
 		end
 
 		it 'a user should be able to see a form to edit a post' do
-
+			data = _get('/posts/edit?id=0')
+			expect(data).to include(_edit_post_form)
 		end
 
 		it 'a user should be able to edit a post' do
-
+			_post('/posts/edit?id=0', { title: 'Title', content: 'some content' } )
+			data = _get('/posts')
+			expect(data).to include('some content') 
+			expect(data).not_to include('blah blah')
 		end
 
 	end
@@ -87,7 +91,7 @@ describe 'Posts:' do
 	end
 
 	def _edit_post_form
-		"	<form action='/posts/edit?=0' method='post'>"
+		"<form action='/posts/edit?id=0' method='post'>"
 	end
 
 end

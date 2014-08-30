@@ -5,8 +5,8 @@
 <body>
 	<h1><%= erb_title %></h1>
 	<form action='/posts/edit?id=<%= post.id %>' method='post'>
-		<input type='text' name='title' placeholder='<%= target_post.title %>'>
-		<input type='text' name='content' placeholder='<%= target_post.content %>'>
+		<input type='text' name='title' value='<%= target_post.title %>'>
+		<input type='text' name='content' value='<%= target_post.content %>'>
 		<input type='submit'>
 	</form>
 </body>

@@ -25,6 +25,10 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 				params =  _parse_form_data(request.body)
 				DATABASE.insert_post(Post.create_post(params))
 				response_for_index(response)
+			when '/posts/edit'
+				post = DATABASE.posts[request.query['id'].to_i]
+				post.title, post.content = _parse_form_data(request.body)
+				response_for_index
 		end
 
 	end
@@ -70,7 +74,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 	def render_edit(post)
 		erb_title = 'Edit Post'
 		target_post = post
-		template = _template_for('posts/new.erb')
+		template = _template_for('posts/edit.erb')
 		html_content = template.result(binding)
 	end
 
