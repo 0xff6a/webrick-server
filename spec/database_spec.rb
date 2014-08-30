@@ -7,6 +7,11 @@ describe Database do
 	let(:csv)		{ double CSV 																																		}
 	let(:row)		{ double :row, :[] => nil																																		}
 
+	before(:each) do
+		allow(DATABASE).to receive(:load_data)
+		allow(DATABASE).to receive(:backup_data)
+	end
+
 	context 'default settings' do
 
 		it 'should have a parent file' do

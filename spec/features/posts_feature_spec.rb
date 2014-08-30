@@ -20,7 +20,7 @@ describe 'Posts:' do
 		end
 
 		it 'a user can create a post from the form' do
-			_post('/posts', { title: 'Test', content: 'blah blah' } )
+			_create_new_post('Test', 'blah blah')
 			data = _get('/posts')
 			expect(data).to include('Test') && include('blah blah')
 		end
@@ -29,21 +29,24 @@ describe 'Posts:' do
 
 	context 'when there are posts' do
 
+		before(:each) { _create_new_post('Test', 'blah blah') }
+
 		it 'a user should be able to see a link delete a post on the homepage' do
-			_post('/posts', { title: 'Test', content: 'blah blah' } )
 			data = _get('/posts')
 			expect(data).to include(_delete_post_link)
 		end
 
-		it 'a user should be able to edit a post' do
-
+		it 'a user should be able to delete a post' do
+			_get('/posts/delete/1')
+			data = _get('/posts')
+			expect(data).not_to include('Test') && include('blah blah')
 		end
 
 		xit 'a user should be able to see a link to edit a post on the homepage' do
 
 		end
 
-		xit 'a user should be able to delete a post' do
+		xit 'a user should be able to edit a post' do
 
 		end
 
@@ -58,12 +61,16 @@ describe 'Posts:' do
 		Net::HTTP.post_form(uri, params)
 	end
 
+	def _create_new_post(title, content)
+		_post('/posts', { title: title, content: content } )
+	end
+
 	def _new_post_link
 		"<a href='/posts/new'>New Post</a>"
 	end
 
 	def _delete_post_link
-		"<a href='/posts/delete/1'>Delete Post</a>"
+		"<a href='/posts/delete/0'>Delete Post</a>"
 	end
 
 	def _new_post_form

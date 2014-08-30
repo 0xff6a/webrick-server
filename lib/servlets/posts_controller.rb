@@ -7,6 +7,9 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 				response_for_index(response)
 			when '/posts/new'
 				response_for_new(response)
+			when '/posts/delete'
+					puts request.query
+
 			else
 				response_for_error(response)
 		end
@@ -19,6 +22,7 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 			when '/posts'
 				params =  _parse_form_data(request.body)
 				DATABASE.insert_post(Post.create_post(params))
+				puts 'DONE'
 				response_for_index(response)
 		end
 

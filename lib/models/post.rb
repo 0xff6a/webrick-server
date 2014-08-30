@@ -5,7 +5,6 @@ class Post
 	def initialize(title, content)
 		@title = ensure_valid_title(title)
 		@content = ensure_valid_content(content)
-		@created_at = Time.now
 		@id = nil
 	end
 

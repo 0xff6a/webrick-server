@@ -21,11 +21,15 @@ RSpec.configure do |config|
   config.before(:suite) do
     @server_thread = Thread.new do
       
-      DATABASE.parent_file = File.expand_path("../../data_test.csv", __FILE__ )
+      DATABASE.parent_file = 'data_test.csv'
       
       BasicMVCApp.run({ :Logger => WEBrick::Log.new("/dev/null"),
                                   :AccessLog => []})
      end
+  end
+
+  config.after(:each) do
+    DATABASE.posts = []
   end
 
   config.after(:suite) do
