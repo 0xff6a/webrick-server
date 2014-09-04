@@ -3,13 +3,9 @@ class HelloWorld < WEBrick::HTTPServlet::AbstractServlet
 	def do_GET(request, response)
 		
 		if request.query['type'] == 'html'
-			response.status = 200
-			response['Content-Type'] = 'text/plain'
-			response.body = 'Hello, World'
+			valid_html_response('Hello, World', response)
 		else
-			response.status = 200
-			response['Content-Type'] = 'text/plain'
-			response.body = 'Hello, World'
+			respond_with(200, 'text/plain', 'Hello, World', response)
 		end
 
 	end

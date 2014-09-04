@@ -1,10 +1,10 @@
 #Libraries
 require 'webrick'
 require 'erb'
-#Servlets
-Dir[File.join(__dir__, 'servlets', '*.rb')].each {|file| require file }
 #Helpers
 Dir[File.join(__dir__, 'servlet_helpers', '*.rb')].each {|file| require file }
+#Servlets
+Dir[File.join(__dir__, 'servlets', '*.rb')].each {|file| require file }
 #Models
 Dir[File.join(__dir__, 'models', '*.rb')].each {|file| require file }
 #Database

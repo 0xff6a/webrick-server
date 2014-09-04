@@ -6,8 +6,12 @@ module HTTPTools
 		response.body = body
 	end
 
-	def send_html_response(body, response)
+	def valid_html_response(body, response)
 		respond_with(200, 'text/html', body, response)
+	end
+
+	def html_error_response(response)
+		respond_with(404, 'text/html','Something has gone wrong', response)
 	end
 
 end

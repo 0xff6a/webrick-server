@@ -1,5 +1,7 @@
 class PostsController < WEBrick::HTTPServlet::AbstractServlet
 
+	include HTTPTools
+
 	def do_GET(request, response)
 		
 		case request.path
@@ -46,27 +48,19 @@ class PostsController < WEBrick::HTTPServlet::AbstractServlet
 	end
 
 	def response_for_index(response)
-		response.status = 200
-		response['Content-Type'] = 'text/html'
-		response.body = render_index
+		valid_html_response(render_index, response)
 	end
 
 	def response_for_new(response)
-		response.status = 200
-		response['Content-Type'] = 'text/html'
-		response.body = render_new
+		valid_html_response(render_new, response)
 	end
 
 	def response_for_edit(id, response)
-		response.status = 200
-		response['Content-Type'] = 'text/html'
-		response.body = render_edit(DATABASE.posts[id])
+		valid_html_response(render_edit(DATABASE.posts[id]), response)
 	end
 
 	def response_for_error(response)
-		response.status = 404
-		response['Content-Type'] = 'text/html'
-		response.body = 'Something has gone wrong'
+		html_error_response(response)
 	end
 
 	def render_index
