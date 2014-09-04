@@ -3,19 +3,15 @@ class Post
 	attr_accessor :title, :content, :created_at, :id
 
 	def initialize(title, content)
-		@title = ensure_valid_title(title)
-		@content = ensure_valid_content(content)
+		@title = title
+		@content = content
 		@id = nil
+		valid?
 	end
 
-	def ensure_valid_title(title)
+	def valid?
 		raise ArgumentError, 'posts must have a title' unless title 
-		title
-	end
-
-	def ensure_valid_content(content)
 		raise ArgumentError, 'posts must have content' unless content
-		content
 	end
 
 	def self.create_post(data)
