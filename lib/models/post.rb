@@ -1,6 +1,6 @@
 class Post
 
-	attr_accessor :title, :content, :created_at, :id
+	attr_accessor :title, :content, :id
 
 	def initialize(title, content)
 		@title = title
