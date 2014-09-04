@@ -2,11 +2,11 @@
 require 'webrick'
 require 'erb'
 #Servlets
-require_relative 'servlets/root'
-require_relative 'servlets/hello_world'
-require_relative 'servlets/posts_controller'
+Dir[File.join(__dir__, 'servlets', '*.rb')].each {|file| require file }
+#Helpers
+Dir[File.join(__dir__, 'servlet_helpers', '*.rb')].each {|file| require file }
 #Models
-require_relative 'models/post'
+Dir[File.join(__dir__, 'models', '*.rb')].each {|file| require file }
 #Database
 require_relative 'database'
 
