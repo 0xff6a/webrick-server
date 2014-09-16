@@ -3,7 +3,7 @@ MVC Challenge
 
 Rules:
 ------
-- Create a web mvc framework (like rails, but much simpler)
+- Create a web MVC framework (like rails, but much simpler)
 - No gems allowed (apart from rspec to drive your tests) 
 - Must be test driven
 
@@ -17,7 +17,7 @@ Technologies Used:
 
 Functionality:
 --------------
-**Implemented basic CRUD function:**
+**Implemented basic CRUD functionality:**
 - Users can add a post with a title and content
 - Users can edit posts
 - Users can delete posts
