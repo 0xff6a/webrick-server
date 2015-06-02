@@ -20,11 +20,12 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     @server_thread = Thread.new do
-      
-      DATABASE.parent_file = 'data_test.csv'
-      
-      BasicMVCApp.run({ :Logger => WEBrick::Log.new("/dev/null"),
-                                  :AccessLog => []})
+        DATABASE.parent_file = 'data_test.csv'
+        
+        BasicMVCApp.run({ 
+          :Logger => WEBrick::Log.new("/dev/null"),
+          :AccessLog => []}
+        )
      end
   end
 
