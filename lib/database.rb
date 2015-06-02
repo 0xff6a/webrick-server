@@ -6,8 +6,8 @@ class Database
 	attr_accessor :posts, :parent_file
 
 	def initialize(parent_file)
-		@parent_file = parent_file
-		@posts = []
+		@parent_file 	= parent_file
+		@posts 				= []
 	end
 
 	def insert_post(post)
